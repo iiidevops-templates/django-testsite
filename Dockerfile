@@ -1,4 +1,4 @@
-FROM python:3.8
+FROM dockerhub/library/python:3.8
 RUN pip install django
 
 COPY ./app /app
