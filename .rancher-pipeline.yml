@@ -16,7 +16,7 @@ stages:
     when:
       branch:
         include:
-        - master
+        - main
         - develop
 
 - name: Checkmarx source code scan
@@ -37,7 +37,7 @@ stages:
   when:
     branch:
       include:
-        - master
+        - main
         - checkmarx
 
 - name: Deploy app-web
@@ -59,7 +59,7 @@ stages:
     when:
       branch:
         include:
-          - master
+          - main
           - develop
 
 - name: Wait web deployment
@@ -83,7 +83,7 @@ stages:
     when:
       branch:
         include:
-          - master
+          - main
 
 - name: Postman test
   steps:
@@ -105,7 +105,7 @@ stages:
   when:
     branch:
       include:
-        - master
+        - main
 
 - name: Webinspect test
   steps:
@@ -125,4 +125,4 @@ stages:
   when:
     branch:
       include:
-        - master
+        - main
