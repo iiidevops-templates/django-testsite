@@ -1,5 +1,5 @@
 FROM dockerhub/library/python:3.8
-RUN pip install django
+RUN pip install django=3.1.7
 
 COPY ./app /app
 WORKDIR /app
