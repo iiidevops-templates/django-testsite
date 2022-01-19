@@ -79,6 +79,7 @@ stages:
     branch:
       include:
       - skip-master
+      - master
 - name: Build--Build and push docker image
   iiidevops: deployed-environments
   steps:
@@ -98,6 +99,7 @@ stages:
     branch:
       include:
       - skip-master
+      - master
 - name: Deploy--Web
   iiidevops: deployed-environments
   steps:
@@ -142,6 +144,7 @@ stages:
     branch:
       include:
       - skip-master
+      - master
 - name: Test--ZAP
   iiidevops: zap
   steps:
