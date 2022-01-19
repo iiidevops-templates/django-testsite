@@ -115,11 +115,11 @@ stages:
       catalogTemplate: cattle-global-data:iii-dev-charts3-web
       name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-serv
       targetNamespace: ${CICD_GIT_REPO_NAME}
-      version: 0.5.3
+      version: 0.5.8
   when:
     branch:
       include:
-      - skip-master
+      - master
 - name: Deploy--Wait Web deployment
   iiidevops: deployed-environments
   steps:
