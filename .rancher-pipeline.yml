@@ -17,6 +17,7 @@ stages:
       include:
       - master
       - develop
+
 - name: Test--SonarQube source code scan
   iiidevops: sonarqube
   steps:
@@ -35,7 +36,9 @@ stages:
   when:
     branch:
       include:
+      - master
       - develop
+
 - name: Test--Checkmarx source code scan
   iiidevops: checkmarx
   steps:
@@ -54,7 +57,8 @@ stages:
   when:
     branch:
       include:
-      - skip
+      - skip-master
+
 - name: Deploy--Set Web environment variables
   iiidevops: deployed-environments
   steps:
@@ -79,7 +83,7 @@ stages:
     branch:
       include:
       - skip-master
-      - master
+
 - name: Build--Build and push docker image
   iiidevops: deployed-environments
   steps:
@@ -99,7 +103,7 @@ stages:
     branch:
       include:
       - skip-master
-      - master
+
 - name: Deploy--Web
   iiidevops: deployed-environments
   steps:
@@ -110,6 +114,7 @@ stages:
         git.repoName: ${CICD_GIT_REPO_NAME}
         git.url: ${CICD_GIT_URL}
         harbor.host: harbor-dev3.iiidevops.org
+        imagePullSecrets[0].name: harbor-local
         pipeline.sequence: ${CICD_EXECUTION_SEQUENCE}
         web.imageTag: ${CICD_GIT_REPO_NAME}/${CICD_GIT_BRANCH}:${CICD_GIT_COMMIT}
         web.port: 8080
@@ -117,11 +122,12 @@ stages:
       catalogTemplate: cattle-global-data:iii-dev-charts3-web
       name: ${CICD_GIT_REPO_NAME}-${CICD_GIT_BRANCH}-serv
       targetNamespace: ${CICD_GIT_REPO_NAME}
-      version: 0.5.8
+      version: 0.5.9
   when:
     branch:
       include:
-      - master
+      - skip-master
+
 - name: Deploy--Wait Web deployment
   iiidevops: deployed-environments
   steps:
@@ -144,7 +150,7 @@ stages:
     branch:
       include:
       - skip-master
-      - master
+
 - name: Test--ZAP
   iiidevops: zap
   steps:
@@ -166,6 +172,7 @@ stages:
     branch:
       include:
       - skip-master
+
 - name: Test--WebInspect
   iiidevops: webinspect
   steps:
@@ -186,6 +193,7 @@ stages:
     branch:
       include:
       - skip-master
+
 - name: Test--Postman
   iiidevops: postman
   steps:
@@ -207,6 +215,7 @@ stages:
     branch:
       include:
       - skip-master
+
 - name: Test--SideeX
   iiidevops: sideex
   steps:
@@ -228,3 +237,4 @@ stages:
     branch:
       include:
       - skip-master
+
