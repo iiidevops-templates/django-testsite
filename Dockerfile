@@ -1,4 +1,4 @@
-FROM dockerhub/library/python:3.8
+FROM dockerhub/library/python:3.8-alpine
 RUN pip install django==3.1.7
 
 COPY ./app /app
